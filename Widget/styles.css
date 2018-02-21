@@ -1,0 +1,154 @@
+body{
+  font-family: 'Verdana';
+  max-width: 960px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  font-size: 14px;
+}
+
+h1{
+  margin:0;
+  color: #3b7f1c;
+  margin-bottom: 10px;
+
+}
+
+article{
+  margin-top: 20px;
+}
+article::after{
+  content: " ";
+  border-bottom: 3px dotted #3b7f1c;
+  text-align: center;
+  display: block;
+  margin-top: 50px;
+}
+
+/*-----------------------Star rating widget-----------*/
+
+.rating > span{
+  font-size: 30px;
+  color: #c1c1c1;
+  position: relative;
+  cursor: pointer;
+
+}
+.rating > span:hover:before, .rating > span.selected:before{
+  content : '\2605';
+  position: absolute;
+  color: orange;
+
+}
+
+/*---------------- Star rating widget method 2---------------*/
+.rating2{
+    direction: rtl;
+    text-align: left;
+}
+.rating2 > span{
+  font-size: 30px;
+  color: #c1c1c1;
+  position: relative;
+  cursor: pointer;
+
+}
+.rating2 > span:hover::before , .rating2 > span:hover ~ span::before, .rating2 > span.selected::before,.rating2 > span.selected ~ span::before{
+  content : '\2605';
+  position: absolute;
+  color: orange;
+  left: 0;
+}
+/*---------------- Phone number formatter------------_*/
+form > .field{
+  position: relative;
+  display: inline-block;
+}
+.hidden{
+  display: none;
+}
+.error{
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 22px;
+}
+
+/*-------------------American flag -----------------------*/
+.flag{
+  width: 400px;
+  height: 260px;
+  position: relative;
+  border: 1px solid black;
+}
+.blue-box{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 200px;
+  height: 140px;
+  background-color: #092b60;
+  z-index: 10;
+}
+
+.blue-box > div{
+  height: 15px;
+}
+
+.blue-box > div:nth-child(even){
+  padding-left: 15px;
+}
+
+.blue-box .star{
+  color: white;
+  font-size: 10px;
+  margin-left: 20px;
+}
+.striped-box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+}
+.stripe{
+  background-color: #c42921;
+  min-height: 20px;
+  margin-bottom:20px;
+
+}
+
+/*-------------------- Zoom image inplace------------*/
+.zoom-container {
+   position: relative;
+   width: 258px;
+   height: 258px;
+   overflow: hidden;
+   border: 1px solid black;
+ }
+ .img-item {
+   position: relative;
+   top: 0;
+   left: 0;
+ }
+ .img-item img {
+   -webkit-transition: 1s ease;
+   transition: 1s ease;
+ }
+ .zoom-container:hover .img-item img {
+   -webkit-transform: scale(1.2);
+   transform: scale(1.2);
+ }
+
+ /*-------------------- Zoom thumbnal of product image------------*/
+.item img{
+  width: 258px;
+  height: 258px;
+}
+.large-item{
+
+}
+
+.hidden{
+  display: none;
+}

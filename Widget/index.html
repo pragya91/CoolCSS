@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+
+  <article>
+    <h1>Star rating widget</h1>
+    <p>Method 1: Taking all the stars in a span using unicode character value "&#9733;". Use the same character as a content of :before pseudo element on hover of the span. With absolute positioning of pseudo element as left: 0, the pseudo element appears above the existing span element. Rest is JavaScript. (Functionality wise it's not perfect)</p>
+
+    <div class="rating">
+      <span rate=1>&#9733;</span>
+      <span rate=2>&#9733;</span>
+      <span rate=3>&#9733;</span>
+      <span rate=4>&#9733;</span>
+      <span rate=5>&#9733;</span>
+    </div>
+    <script>
+      let stars = document.querySelectorAll(".rating > span");
+      for(let star of stars){
+        star.addEventListener("click",function(e){
+          for(let star of stars){
+            star.className = star.className.replace("selected","");
+          }
+          let count=1;
+          for(let star of stars){
+            if(count<=e.target.attributes.rate.value){
+              star.className = "selected";
+            }
+            count++;
+          }
+        });
+      }
+    </script>
+    <br>
+    <p>Method 2: Stars are created using unicode character "&#9733;". The selection is done using hover state of the span and creating a pseudo element. We also use CSS sibling selector ~ property to select the following sibling stars. Since this selector selects the stars that succeed the currently selected star, we reverse the text direction for the container div. <em>direction: rtl</em> Rest is JavaScript.</p>
+    <div class="rating2">
+      <span rate=1>&#9733;</span>
+      <span rate=2>&#9733;</span>
+      <span rate=3>&#9733;</span>
+      <span rate=4>&#9733;</span>
+      <span rate=5>&#9733;</span>
+    </div>
+    <script>
+      let stars2 = document.querySelectorAll(".rating2 > span");
+      for(let star of stars2){
+        star.addEventListener("click",function(e){
+          for(let star of stars2){
+            star.className = star.className.replace("selected","");
+          }
+          if(e.target.className == "selected")
+            e.target.className = "";
+          else {
+            e.target.className = "selected";
+          }
+        });
+      }
+      /*Sample XHR Request
+      let xhr = new XMLHttpRequest();
+      xhr.open('PUT',"the/required/url",true);
+      xhr.setRequestHeder("Content-Type", "application/json");
+      xhr.onload = () => {
+        if(xhr.status == 200){
+          JSON.parse(xhr.response);
+          //do somehthing
+        }else{
+          //do  handelling
+        }
+      };
+      chr.onerror = (e) = {
+
+      }
+      xhr.send(JSON.stringify({productID: 1221, rating: e.target.attributes.rate.value}));
+    }
+    */
+    </script>
+  </article>
+
+  <article>
+    <h1>Phone number formatter</h1>
+    <form name="phoneForm" onsubmit="submitForm">
+      <div class="field">
+        <input type="text" placeholder="(xxx) xxx-xxxx" name="phone" id="phone" />
+        <span class="hidden error" id="phone_error">Invalid input</span>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      function submitForm(e){
+        e.preventDefault();
+        return false;
+      }
+      var phoneField = document.getElementById("phone");
+      var phoneError = document.getElementById("phone_error");
+      phoneField.addEventListener("blur",function(e){
+        var value = e.target.value;
+        if(value.match(/\(\d{3}\)\s\d{3}-\d{4}/)){
+          phoneError.className = phoneError.className+" hidden";
+          return;
+        }else{
+          if(value.match(/\d{10}/)){
+            e.target.value = "("+value.substr(0,3)+") "+value.substr(3,3)+"-"+value.substr(6,4);
+            phoneError.className = phoneError.className+" hidden";
+          }else{
+            phoneError.className = phoneError.className.replace("hidden","");
+          }
+        }
+      });
+    </script>
+  </article>
+  <article>
+    <h1>American Flag</h1>
+    <div class="flag">
+      <div class="blue-box"></div>
+      <div class="striped-box">
+
+      </div>
+    </div>
+    <script>
+      var blueBox = document.getElementsByClassName("blue-box")[0];
+      for(var i=0;i<9;i++){
+        var starRow = document.createElement("div");
+        blueBox.appendChild(starRow);
+        var count = (i%2 ==0 )? 6 : 5;
+          for(var j=0;j<count;j++){
+            var star = document.createElement("span");
+            star.className = "star";
+            //var textStar = document.createTextNode('&#9733;');
+            //star.appendChild(textStar);
+            star.innerHTML = '&#9733;';
+            starRow.appendChild(star);
+          }
+      }
+      var stripedBox = document.getElementsByClassName("striped-box")[0];
+      for(var i=0;i<7;i++){
+        var stripe = document.createElement("div");
+        stripe.className = "stripe";
+        stripe.appendChild(document.createTextNode(" "));
+        stripedBox.appendChild(stripe);
+      }
+    </script>
+  </article>
+  <article>
+    <h1>Zoom image in-place</h1>
+    <div class="zoom-container">
+      <div class="img-item">
+        <img src="images/sloth.jpg" alt="image-of-a-sloth"/>
+      </div>
+    </div>
+  </article>
+  <article>
+    <h1>Zoom parts of a thumbnail</h1>
+    <div class="product-container">
+      <div class="item">
+        <img src="images/lipstick_small.png" alt="image-of-lipstick-shades"/>
+      </div>
+      <div class="large-item hidden">
+        <img src="images/lipstick_large.gif" alt="image-of-lipstick-shades" />
+      </div>
+    </div>
+    <script>
+      var productImg = document.querySelector(".product-container > .item > img");
+      var largeImg = document.querySelector(".product-container > .large-item > img");
+      productImg.addEventListener("mouseover",function(e){
+        var posX = e.offSetX;
+        var posY = e.offSetY;
+        largeImg.className = largeImg.className.replace("hidden","");
+      });
+      productImg.addEventListener("mouseout",function(e){
+        largeImg.className = largeImg.className + " hidden";
+      });
+</body>
+</html>
